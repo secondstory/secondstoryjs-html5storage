@@ -35,7 +35,7 @@ steal.plugins("jquery/model/store",
       
       init: function(klass) {
         this.storingClass     = klass;
-        this.storageNamespace = klass.underscoredName + ".";
+        this.storageNamespace = (klass._fullName || klass.underscoredName) + ".";
         this.storage          = window[this.storageMethod];
 	    },
 	    
