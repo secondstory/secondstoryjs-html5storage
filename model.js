@@ -1,4 +1,5 @@
 steal.plugins('ss/model/session_store', "steal/inflector").then(function($) {
+  var _model = window.SS && window.SS.Model;
 
   $.Model.extend("SS.Model",
   {
@@ -78,4 +79,9 @@ steal.plugins('ss/model/session_store', "steal/inflector").then(function($) {
     }
   }
   );
+
+  if (_model) {
+    $.extend(SS.Model, _model);
+    _model = null;
+  }
 });
