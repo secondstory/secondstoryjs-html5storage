@@ -1,4 +1,4 @@
-steal.plugins('ss/model/session_store', "steal/inflector").then(function($) {
+steal.plugins('ss/model/session_store').then("//steal/generate/inflector", function($) {
   var _model = window.SS && window.SS.Model;
 
   $.Model.extend("SS.Model",
