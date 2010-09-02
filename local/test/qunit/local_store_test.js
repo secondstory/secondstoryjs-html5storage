@@ -3,7 +3,7 @@ module("HTML5 Model Store");
 $.Model.extend("LocalStoreTestModel", 
 {
   setup: function(){
-		this.storeType = SS.Model.LocalStore;
+		this.storeType = SS.Model.HTML5Store.Local;
     this._super.apply(this, arguments);
 	}
 },

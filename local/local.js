@@ -17,7 +17,7 @@ steal.plugins("jquery/model/store",
     steal.dev.log("WARNING: The current browser does not support HTML5 Local & Session Storage");
     //@steal-remove-end
   } else {
-    $.Class.extend("SS.Model.LocalStore", 
+    $.Class.extend("SS.Model.HTML5Store.Local", 
     {
     },
     {
