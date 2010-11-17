@@ -1,5 +1,4 @@
-steal.plugins("jquery/model/store", 
-              "jquery/model", 
+steal.plugins("ss/model/html5_store/simple", 
               "jquery/lang/json").then(function($) {
   function hasLocalAndSessionStorageSupport() {
     try {
@@ -11,7 +10,7 @@ steal.plugins("jquery/model/store",
   }
 
   if (!hasLocalAndSessionStorageSupport()) { 
-    $.Model.Store.extend("SS.Model.HTML5Store.Local", {}, {});
+    SS.Model.HTML5Store.Simple.extend("SS.Model.HTML5Store.Local", {}, {});
 
     //@steal-remove-start
     steal.dev.log("WARNING: The current browser does not support HTML5 Local & Session Storage");
@@ -34,9 +33,13 @@ steal.plugins("jquery/model/store",
       }(),
       
       init: function(klass) {
+        this.setStoringClass(klass);
+        this.storage          = window[this.storageMethod];
+	    },
+
+      setStoringClass: function(klass) {
         this.storingClass     = klass;
         this.storageNamespace = (klass._fullName || klass.underscoredName) + ".";
-        this.storage          = window[this.storageMethod];
 	    },
 	    
       findOne: function(id) {
@@ -53,10 +56,18 @@ steal.plugins("jquery/model/store",
         this.storage[this.storageNamespace + id] = this.toJSON(obj.attrs());
 	    },
 	    
+      push: function(obj, id){
+        this.create(obj, id);
+	    },
+
       destroy: function(id){
         delete this.storage[this.storageNamespace + id];
 	    },
 	    
+      remove: function(id){
+        this.destroy(id);
+	    },
+
       find: function(f){
         var instances = [];
         
